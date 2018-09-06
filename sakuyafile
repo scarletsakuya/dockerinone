@@ -11,7 +11,7 @@ RUN set -ex \
     && apt-get update \
     && apt-get -t testing install python3.6 -y \
     && apt-get install -yqq vim openssh-server wget locales tzdata lrzsz curl squid3 nghttp2 \
-    ffmpeg libmagic-dev libwebp-dev py3-numpy  python3-pip py3-pillow py3-yaml py3-requests python3-pil screen \
+    ffmpeg libmagic-dev libwebp-dev python3-pip python3-pil screen \
     # set time etc
     && locale-gen en_US.UTF-8 \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
@@ -42,6 +42,9 @@ RUN set -ex \
     # add auto-start services
     # make clean
     && apt-get clean \
+    && apt-get autoclean \
+    && apt-get autoremove \
+    && dpkg --list | grep "^rc" | cut -d " " -f 3 | xargs sudo dpkg --purge \
     && rm -rf /tmp/* /root/.cache /var/lib/apt/lists/*
 
 EXPOSE 22
