@@ -52,7 +52,7 @@ RUN set -ex \
     #&& dpkg --list | grep "^rc" | cut -d " " -f 3 | xargs dpkg --purge \
     && rm -rf /tmp/* /root/.cache /var/lib/apt/lists/*
 
-COPY nghttp.conf /etc/nghttpx/nghttpx.conf
+COPY nghttpx.conf /etc/nghttpx/nghttpx.conf
 COPY squid.conf /etc/squid/squid.conf
 
 EXPOSE 22
