@@ -1,3 +1,3 @@
 #! /bin/sh
 
-/etc/init.d/sshd
+/etc/init.d/sshd start
