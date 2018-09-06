@@ -21,23 +21,23 @@ RUN set -ex \
     # set root password for ssh \
     && echo root:${ROOT_PASS}|chpasswd \
     # set v2ray
-    && cd /tmp \
-    && curl -L -s https://install.direct/go.sh \
-    && chmod +x /tmp/go.sh \
-    && sh /tmp/go.sh \
+    #&& cd /tmp \
+    #&& curl -L -s https://install.direct/go.sh \
+    #&& chmod +x /tmp/go.sh \
+    #&& sh /tmp/go.sh \
     # set ehforwarderbot
-    && pip3 install --upgrade pip \
-    && pip3 install ehforwarderbot \
-    && pip3 install efb-telegram-master \
-    && pip3 install efb-wechat-slave \
+    #&& pip3 install --upgrade pip \
+    #&& pip3 install ehforwarderbot \
+    #&& pip3 install efb-telegram-master \
+    #&& pip3 install efb-wechat-slave \
     # create dir and files
-    && mkdir -p /var/run/sshd \
-    && mkdir -p /root/.ehforwarderbot/profiles/default/ \
-    && mkdir -p /root/.ehforwarderbot/profiles/default/blueset.telegram \
-    && touch /root/.ehforwarderbot/profiles/default/config.yaml \
-    && touch /root/.ehforwarderbot/profiles/default/bluestet.telegram\config.yaml \
-    && echo "master_channel: blueset.telegram \	slave_channels: \- blueset.wechat" | tee /root/.ehforwarderbot/profiles/default/config.yaml \
-    && echo "taken:\"${TOKEN}\" \admins: \- ${USER} " | tee \
+    #&& mkdir -p /var/run/sshd \
+    #&& mkdir -p /root/.ehforwarderbot/profiles/default/ \
+    #&& mkdir -p /root/.ehforwarderbot/profiles/default/blueset.telegram \
+    #&& touch /root/.ehforwarderbot/profiles/default/config.yaml \
+    #&& touch /root/.ehforwarderbot/profiles/default/bluestet.telegram\config.yaml \
+    #&& echo "master_channel: blueset.telegram \	slave_channels: \- blueset.wechat" | tee /root/.ehforwarderbot/profiles/default/config.yaml \
+    #&& echo "taken:\"${TOKEN}\" \admins: \- ${USER} " | tee \
     # add auto-start services
     # make clean
     && apt-get clean \
@@ -49,4 +49,4 @@ EXPOSE 20443
 EXPOSE 1434
 EXPOSE 3389
 
-CMD ["/usr/sbin/sshd", "-D", "v2ray", "-config=/etc/v2ray/config.json"]
+#CMD ["/usr/sbin/sshd", "-D", "v2ray", "-config=/etc/v2ray/config.json"]
