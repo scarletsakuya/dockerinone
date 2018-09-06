@@ -21,10 +21,10 @@ RUN set -ex \
     # set root password for ssh \
     && echo root:${ROOT_PASS}|chpasswd \
     # set v2ray
-    && curl -L -o /tmp/go.sh https://install.direct/go.sh \
-    && chmod +x /tmp/go.sh \
-    && sh /tmp/go.sh \
-    # set ehforwarderbot
+    # && curl -L -o /tmp/go.sh https://install.direct/go.sh \
+    #&& chmod +x /tmp/go.sh \
+    #&& sh /tmp/go.sh \
+    # install ehforwarderbot
     && pip3 install --upgrade pip \
     && pip3 install ehforwarderbot \
     && pip3 install efb-telegram-master \
@@ -36,7 +36,7 @@ RUN set -ex \
     && touch /root/.ehforwarderbot/profiles/default/config.yaml \
     && touch /root/.ehforwarderbot/profiles/default/bluestet.telegram\config.yaml \
     && echo "master_channel: blueset.telegram \	slave_channels: \- blueset.wechat" | tee /root/.ehforwarderbot/profiles/default/config.yaml \
-    && echo "taken:\"${TOKEN}\" \admins: \- ${USER} " | tee \
+    && echo "taken:\"${TOKEN}\" \admins: \- ${USER} " | tee /root/.ehforwarderbot/profiles/default/bluestet.telegram\config.yaml \
     # add auto-start services
     # make clean
     && apt-get clean \
