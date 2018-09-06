@@ -9,9 +9,9 @@ ENV USER=999999999
 RUN set -ex \
     && echo "deb http://ftp.de.debian.org/debian testing main" | tee -a /etc/apt/sources.list \
     && apt-get update \
-    && apt-get -t testing install python3.6 -y \
+    && apt-get -t testing install python3.6 python3-distutils -y \
     && apt-get install -yqq vim openssh-server wget locales tzdata lrzsz curl squid3 nghttp2 \
-    ffmpeg libmagic-dev libwebp-dev python3-pip python3-pil screen \
+    ffmpeg libmagic-dev libwebp-dev python3-pip screen \
     # set time etc
     && locale-gen en_US.UTF-8 \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
@@ -25,12 +25,12 @@ RUN set -ex \
     # set v2ray
     && curl -L -o /tmp/go.sh https://install.direct/go.sh \
     && chmod +x /tmp/go.sh \
-    && sh /tmp/go.sh \
+    && /tmp/go.sh \
     # install ehforwarderbot
-    #&& pip3 install --upgrade pip \
-    #&& pip3 install ehforwarderbot \
-    #&& pip3 install efb-telegram-master \
-    #&& pip3 install efb-wechat-slave \
+    && python3.6 -m pip install --upgrade pip \
+    && python3.6 -m pip install ehforwarderbot \
+    && python3.6 -m pip install efb-telegram-master \
+    && python3.6 -m pip install efb-wechat-slave \
     # create dir and files
     && mkdir -p /var/run/sshd \
     && mkdir -p /root/.ehforwarderbot/profiles/default/ \
