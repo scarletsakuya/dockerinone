@@ -44,7 +44,7 @@ RUN set -ex \
     && echo "master_channel: blueset.telegram \	slave_channels: \- blueset.wechat" | tee /root/.ehforwarderbot/profiles/default/config.yaml \
     && echo "taken:\"${TOKEN}\" \admins: \- ${USER} " | tee /root/.ehforwarderbot/profiles/default/bluestet.telegram\config.yaml \
     # add auto-start services
-    && chmod /etc/init.d/autostart.sh \
+    && chmod +x /etc/init.d/autostart.sh \
     && update-rc.d /etc/init.d/autostart.sh defaults \
     && update-rc.d -f /etc/init.d/autostart.sh \
     # make clean
