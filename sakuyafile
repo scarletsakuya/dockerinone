@@ -1,6 +1,7 @@
 FROM library/debian:latest
 
 ENV ROOT_PASS=root
+ENV HTTP_USER=sakuya
 ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
 ENV TZ=Asia/Shanghai
 ENV TOKEN=88888888:00000000000000000
@@ -24,7 +25,7 @@ RUN set -ex \
     && sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config \
     # set password for ssh and nghttp
     && echo root:${ROOT_PASS}|chpasswd \
-    && htpasswd -c /etc/squid/password ${ROOT_PASS} \
+    && htpasswd -b -c /etc/squid/password ${HTTP_USER} ${ROOT_PASS} \
     # set v2ray
     && curl -L -o /tmp/go.sh https://install.direct/go.sh \
     && chmod +x /tmp/go.sh \
