@@ -14,7 +14,7 @@ RUN set -ex \
     && apt-get update \
     && apt-get -t testing install python3.6 python3-distutils -y \
     && apt-get install -yqq vim openssh-server wget locales tzdata lrzsz curl squid3 nghttp2 \
-    ffmpeg libmagic-dev libwebp-dev python3-pip screen \
+    ffmpeg libmagic-dev libwebp-dev python3-pip apache2-utils screen \
     # set time etc
     && locale-gen en_US.UTF-8 \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
