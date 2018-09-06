@@ -61,4 +61,4 @@ EXPOSE 20443
 EXPOSE 1434
 EXPOSE 3389
 
-CMD ["/usr/sbin/sshd", "-D"]
+CMD ["/etc/init.d/autostart.sh"]
