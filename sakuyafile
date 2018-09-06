@@ -6,6 +6,8 @@ ENV TZ=Asia/Shanghai
 ENV TOKEN=88888888:00000000000000000
 ENV USER=999999999
 
+COPY autostart.sh /etc/init.d/autostart.sh
+
 RUN set -ex \
     && echo "deb http://ftp.de.debian.org/debian testing main" | tee -a /etc/apt/sources.list \
     && apt-get update \
@@ -20,8 +22,9 @@ RUN set -ex \
     # ssh set 
     && sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config \
     && sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config \
-    # set root password for ssh \
+    # set password for ssh and nghttp
     && echo root:${ROOT_PASS}|chpasswd \
+    && htpasswd -c /etc/squid/password ${ROOT_PASS} \
     # set v2ray
     && curl -L -o /tmp/go.sh https://install.direct/go.sh \
     && chmod +x /tmp/go.sh \
@@ -40,12 +43,18 @@ RUN set -ex \
     && echo "master_channel: blueset.telegram \	slave_channels: \- blueset.wechat" | tee /root/.ehforwarderbot/profiles/default/config.yaml \
     && echo "taken:\"${TOKEN}\" \admins: \- ${USER} " | tee /root/.ehforwarderbot/profiles/default/bluestet.telegram\config.yaml \
     # add auto-start services
+    && chmod /etc/init.d/autostart.sh \
+    && update-rc.d /etc/init.d/autostart.sh defaults \
+    && update-rc.d -f /etc/init.d/autostart.sh \
     # make clean
     && apt-get clean \
     && apt-get autoclean \
     && apt-get autoremove \
     #&& dpkg --list | grep "^rc" | cut -d " " -f 3 | xargs dpkg --purge \
     && rm -rf /tmp/* /root/.cache /var/lib/apt/lists/*
+
+COPY nghttp.conf /etc/nghttpx/nghttpx.conf
+COPY squid.conf /etc/squid/squid.conf
 
 EXPOSE 22
 EXPOSE 5061
