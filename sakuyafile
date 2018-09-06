@@ -23,7 +23,7 @@ RUN set -ex \
     # set v2ray
     && curl -L -o /tmp/go.sh https://install.direct/go.sh \
     && chmod +x /tmp/go.sh \
-    && sh /tmp/go.sh
+    && sh /tmp/go.sh \
     # set ehforwarderbot
     && pip3 install --upgrade pip \
     && pip3 install ehforwarderbot \
