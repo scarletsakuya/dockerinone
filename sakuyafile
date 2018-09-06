@@ -45,8 +45,6 @@ RUN set -ex \
     && echo "taken:\"${TOKEN}\" \admins: \- ${USER} " | tee /root/.ehforwarderbot/profiles/default/bluestet.telegram\config.yaml \
     # add auto-start services
     && chmod +x /etc/init.d/autostart.sh \
-    && update-rc.d /etc/init.d/autostart.sh defaults \
-    && update-rc.d -f /etc/init.d/autostart.sh \
     # make clean
     && apt-get clean \
     && apt-get autoclean \
