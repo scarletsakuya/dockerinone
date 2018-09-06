@@ -54,6 +54,7 @@ RUN set -ex \
 
 COPY nghttpx.conf /etc/nghttpx/nghttpx.conf
 COPY squid.conf /etc/squid/squid.conf
+COPY entrypoint.sh /usr/local/bin/
 
 EXPOSE 22
 EXPOSE 5061
