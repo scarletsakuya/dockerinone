@@ -25,10 +25,10 @@ RUN set -ex \
     #&& chmod +x /tmp/go.sh \
     #&& sh /tmp/go.sh \
     # install ehforwarderbot
-    && pip3 install --upgrade pip \
-    && pip3 install ehforwarderbot \
-    && pip3 install efb-telegram-master \
-    && pip3 install efb-wechat-slave \
+    # && pip3 install --upgrade pip \
+    #&& pip3 install ehforwarderbot \
+    #&& pip3 install efb-telegram-master \
+    #&& pip3 install efb-wechat-slave \
     # create dir and files
     && mkdir -p /var/run/sshd \
     && mkdir -p /root/.ehforwarderbot/profiles/default/ \
