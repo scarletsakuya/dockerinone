@@ -14,8 +14,9 @@ RUN set -ex \
     && mkdir -p /var/run/sshd \
     && sed -ri s/#PermitRootLogin.*/PermitRootLogin\ yes/ /etc/ssh/sshd_config \
     && sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config \
-    && ssh-keygen -A &&
-    && echo "root:${ROOT_PASSWORD}" | chpasswd
+    && ssh-keygen -A \
+    && echo "root:${ROOT_PASSWORD}" | chpasswd \
+    && apk del .build-deps \
     && rm -rf /var/cache/apk/* /tmp/* /root/.cache/*
     
 EXPOSE 22/tcp
