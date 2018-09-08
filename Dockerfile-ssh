@@ -1,0 +1,23 @@
+FROM library/alpine:latest
+
+#system
+ARG TZ="Asia/Shanghai"
+
+ENV TZ ${TZ}
+ENV ROOT_PASSWORD=root
+
+RUN set -ex \
+    && apk --no-cache upgrade \
+    && apk add --no-cache --virtual .build-deps ca-certificates tzdata openssh \
+    && ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime \
+    && echo ${TZ} > /etc/timezone \
+    && mkdir -p /var/run/sshd \
+    && sed -ri s/#PermitRootLogin.*/PermitRootLogin\ yes/ /etc/ssh/sshd_config \
+    && sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config \
+    && ssh-keygen -A &&
+    && echo "root:${ROOT_PASSWORD}" | chpasswd
+    && rm -rf /var/cache/apk/* /tmp/* /root/.cache/*
+    
+EXPOSE 22/tcp
+
+ENTRYPOINT ["bash", "/usr/bin/sshd -D -e -o PermitRootLogin=yes -o Port=${SSH_PORT}) &"]
