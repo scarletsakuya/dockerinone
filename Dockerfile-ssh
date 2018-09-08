@@ -21,4 +21,4 @@ RUN set -ex \
     
 EXPOSE 22/tcp
 
-ENTRYPOINT ["bash", "/usr/bin/sshd -D -e -o PermitRootLogin=yes -o Port=${SSH_PORT}) &"]
+ENTRYPOINT ["bash", "/usr/bin/sshd -D -e -o PermitRootLogin=yes -o Port=22 &"]
