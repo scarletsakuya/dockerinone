@@ -1,0 +1,16 @@
+FROM sakuyatouhou/alpine-ssh
+
+#install v2ray
+ENV V2RAY_LOG_DIR=/var/log/v2ray
+ENV V2RAY_CONFIG_DIR=/etc/v2ray/
+ENV V2RAY_VERSION=v3.39
+ENV V2RAY_DOWNLOAD_URL=https://github.com/v2ray/v2ray-core/releases/download/${V2RAY_VERSION}/v2ray-linux-64.zip
+
+RUN set -ex \
+    && mkdir -p /tmp/v2ray \
+    && wget -O /tmp/v2ray/v2ray.zip ${V2RAY_DOWNLOAD_URL} \
+    && unzip /tmp/v2ray/v2ray.zip -d /tmp/v2ray/ \
+    && mv /tmp/v2ray/v2ray-${V2RAY_VERSION}-linux-64/v2ray /usr/bin \
+    && chmod +x /usr/bin/v2ray 
+    && apk del .build-deps \
+    && rm -rf /tmp/* /var/cache/apk/* /root/.cache/*
