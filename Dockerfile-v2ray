@@ -11,6 +11,37 @@ RUN set -ex \
     && wget -O /tmp/v2ray/v2ray.zip ${V2RAY_DOWNLOAD_URL} \
     && unzip /tmp/v2ray/v2ray.zip -d /tmp/v2ray/ \
     && mv /tmp/v2ray/v2ray-${V2RAY_VERSION}-linux-64/v2ray /usr/bin \
-    && chmod +x /usr/bin/v2ray 
+    && chmod +x /usr/bin/v2ray \
     && apk del .build-deps \
     && rm -rf /tmp/* /var/cache/apk/* /root/.cache/*
+    
+#copy config file
+COPY v2rayconfig.json /etc/v2ray/config.json
+COPY entrypoint.sh /usr/local/bin/v2ray.sh
+
+#ss
+ENV SS_PORT=1343
+ENV SS_PASSWORD=sakuya
+ENV SS_METHOD=aes-256-gcm
+
+#vmess
+ENV VMESS_PORT=5061
+ENV VMESS_ID=00000000-0000-0000-0000-000000000000
+ENV VMESS_LEVEL=1
+ENV VMESS_ALTERID=64
+
+#kcp
+ENV KCP_PORT_VMESS=5061
+ENV KCP_MUT=1350
+ENV KCP_TTI=50
+ENV KCP_UPLINK=5
+ENV KCP_DOWNLINK=120
+ENV KCP_READBUFF=2
+ENV KCP_WRITEBUFF=2
+
+EXPOSE ${SS_PORT}/tcp
+EXPOSE ${SS_PORT}/udp
+EXPOSE ${VMESS_PORT}/tcp
+EXPOSE ${KCP_PORT_VMESS}/udp
+
+ENTRYPOINT [ "bash", "/usr/local/bin/v2ray.sh" ]
