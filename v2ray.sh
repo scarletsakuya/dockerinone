@@ -1,8 +1,5 @@
 #!/bin/bash
 
-sed -i "s/\[SS_PORT\]/${SS_PORT}/g" /etc/v2ray/config.json
-sed -i "s/\[SS_PASSWORD\]/${SS_PASSWORD}/g" /etc/v2ray/config.json
-sed -i "s/\[SS_METHOD\]/${SS_METHOD}/g" /etc/v2ray/config.json
 sed -i "s/\[VMESS_PORT\]/${VMESS_PORT}/g" /etc/v2ray/config.json
 sed -i "s/\[VMESS_ID\]/${VMESS_ID}/g" /etc/v2ray/config.json
 sed -i "s/\[VMESS_LEVEL\]/${VMESS_LEVEL}/g" /etc/v2ray/config.json
