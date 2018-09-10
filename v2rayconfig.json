@@ -18,15 +18,7 @@
     }
   },
   "inboundDetour": [
-    {
-      "port": [SS_PORT],
-      "protocol": "shadowsocks",
-      "settings": {
-        "method": "[SS_METHOD]",
-        "password": "[SS_PASSWORD]",
-        "network": "tcp,udp"
-      }
-    },
+
     {
       "port": [KCP_PORT_VMESS],
       "protocol": "vmess",
