@@ -19,11 +19,6 @@ RUN set -ex \
 COPY v2rayconfig.json /etc/v2ray/config.json
 COPY entrypoint.sh /usr/local/bin/v2ray.sh
 
-#ss
-ENV SS_PORT=1343
-ENV SS_PASSWORD=sakuya
-ENV SS_METHOD=aes-256-gcm
-
 #vmess
 ENV VMESS_PORT=5061
 ENV VMESS_ID=00000000-0000-0000-0000-000000000000
